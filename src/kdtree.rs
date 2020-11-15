@@ -62,6 +62,7 @@ impl<A: Float + Zero + One, T: std::cmp::PartialEq, U: AsRef<[A]> + std::cmp::Pa
     pub fn nearest<F>(
         &self,
         point: &[A],
+        max_dist: A,
         num: usize,
         distance: &F,
     ) -> Result<Vec<(A, &T)>, ErrorKind>
@@ -88,7 +89,7 @@ impl<A: Float + Zero + One, T: std::cmp::PartialEq, U: AsRef<[A]> + std::cmp::Pa
             self.nearest_step(
                 point,
                 num,
-                A::infinity(),
+                max_dist,
                 distance,
                 &mut pending,
                 &mut evaluated,
